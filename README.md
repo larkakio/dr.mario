@@ -15,7 +15,7 @@ Classic Dr. Mario–style puzzle game as a mobile-first mini app for [Base](http
 ```bash
 npm install
 cp .env.local.example .env.local
-# Edit .env.local: set NEXT_PUBLIC_APP_URL to your deployed URL (or http://localhost:3000 for local)
+# Edit .env.local: NEXT_PUBLIC_APP_URL=https://dr-mario-teal.vercel.app (or http://localhost:3000 for local)
 npm run dev
 ```
 
@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Deployment (Vercel)
 
 1. Push to GitHub and import the repo in [Vercel](https://vercel.com).
-2. Set **Environment Variable**: `NEXT_PUBLIC_APP_URL` = `https://your-project.vercel.app`.
+2. Set **Environment Variable**: `NEXT_PUBLIC_APP_URL` = `https://dr-mario-teal.vercel.app`.
 3. Deploy. Turn off **Deployment Protection** (Vercel Auth) if you use the Base account association tool.
 4. **Account association** (Base): Go to [Base Build – Account association](https://www.base.dev/preview?tab=account), enter your app URL, verify, then copy the `accountAssociation` object into `minikit.config.ts` and redeploy.
 5. **Verify**: [Base Preview](https://base.dev/preview) and Farcaster embed/preview tools.

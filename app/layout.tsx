@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://your-app.vercel.app'
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://dr-mario-teal.vercel.app'
 
 const FC_EMBED = {
   version: '1',

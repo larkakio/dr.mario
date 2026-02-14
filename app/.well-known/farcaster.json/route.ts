@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { minikitConfig } from '@/minikit.config'
 
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://your-app.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://dr-mario-teal.vercel.app'
   const manifest = {
     accountAssociation: minikitConfig.accountAssociation.header
       ? minikitConfig.accountAssociation
