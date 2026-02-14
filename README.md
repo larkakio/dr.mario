@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dr. Mario – Mini App for Base & Farcaster
 
-## Getting Started
+Classic Dr. Mario–style puzzle game as a mobile-first mini app for [Base](https://base.org) and [Farcaster](https://farcaster.xyz).
 
-First, run the development server:
+## Features
+
+- **Gameplay**: 8×16 grid, viruses (red/blue/yellow), two-segment capsules. Match 4+ same color in a row or column to clear. Win by clearing all viruses; lose if the bottle fills.
+- **Controls**: Swipe left/right to move, swipe down for soft drop, tap or swipe up to rotate. Keyboard arrows work on desktop.
+- **Levels**: Choose starting level 0–20 (virus count = level×4 + 4, max 84).
+- **Design**: Dark neon style (#0a0e1a background, cyan/red/yellow/blue accents).
+- **Base/Farcaster**: Embed metadata (fc:miniapp = fc:frame, version `"1"`, `launch_frame`), `sdk.actions.ready()`, webhook, manifest at `/.well-known/farcaster.json`.
+
+## Quick Start
 
 ```bash
+npm install
+cp .env.local.example .env.local
+# Edit .env.local: set NEXT_PUBLIC_APP_URL to your deployed URL (or http://localhost:3000 for local)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment (Vercel)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push to GitHub and import the repo in [Vercel](https://vercel.com).
+2. Set **Environment Variable**: `NEXT_PUBLIC_APP_URL` = `https://your-project.vercel.app`.
+3. Deploy. Turn off **Deployment Protection** (Vercel Auth) if you use the Base account association tool.
+4. **Account association** (Base): Go to [Base Build – Account association](https://www.base.dev/preview?tab=account), enter your app URL, verify, then copy the `accountAssociation` object into `minikit.config.ts` and redeploy.
+5. **Verify**: [Base Preview](https://base.dev/preview) and Farcaster embed/preview tools.
 
-## Learn More
+## Assets
 
-To learn more about Next.js, take a look at the following resources:
+- **Icon**: `public/icon.png` – solid dark background (#0a0e1a), no white corners. Base recommends 1024×1024 PNG, no transparency.
+- **Hero**: `public/hero-image.png` – 1200×630 (1.91:1) for Farcaster embed. Same dark background to the edges.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `app/` – layout (metadata, viewport), page, globals.css, api/webhook, .well-known/farcaster.json route
+- `components/` – FarcasterReady, GameBoard, Capsule, Virus, GameUI, GameControls, StartMenu, GameOverModal, LevelCompleteModal, ShareButton
+- `context/` – GameContext (state + actions)
+- `hooks/` – useSwipeGesture, useGameLoop
+- `lib/` – constants, gameLogic
+- `minikit.config.ts` – Base mini app manifest config (accountAssociation + miniapp fields)
 
-## Deploy on Vercel
+## Links
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Base Mini Apps Quickstart](https://docs.base.org/mini-apps/quickstart/create-new-miniapp)
+- [Base Featured Guidelines](https://docs.base.org/mini-apps/featured-guidelines/overview)
+- Farcaster: [Embed](https://warpcast.com/~/developers/embeds) / [Mini Apps](https://docs.farcaster.xyz/developers/mini-apps)
