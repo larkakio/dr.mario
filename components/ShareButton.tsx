@@ -9,25 +9,16 @@ interface ShareButtonProps {
 
 export function ShareButton({ className = '', children }: ShareButtonProps) {
   const handleShare = useCallback(() => {
-    import('@farcaster/miniapp-sdk')
-      .then(({ sdk }) => {
-        const url = typeof window !== 'undefined' ? window.location.href : ''
-        sdk.actions.openUrl(url).catch(() => {
-          if (typeof navigator !== 'undefined' && navigator.share) {
-            navigator.share({ url, title: 'Dr. Mario Puzzle', text: 'Match pills, destroy viruses!' })
-          } else {
-            navigator.clipboard?.writeText(url)
-          }
+    const url = typeof window !== 'undefined' ? window.location.href : ''
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      navigator
+        .share({ url, title: 'Dr. Mario Puzzle', text: 'Match pills, destroy viruses!' })
+        .catch(() => {
+          window.open(url, '_blank', 'noopener,noreferrer')
         })
-      })
-      .catch(() => {
-        const url = typeof window !== 'undefined' ? window.location.href : ''
-        if (typeof navigator !== 'undefined' && navigator.share) {
-          navigator.share({ url, title: 'Dr. Mario Puzzle', text: 'Match pills, destroy viruses!' })
-        } else {
-          navigator.clipboard?.writeText(url)
-        }
-      })
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer')
+    }
   }, [])
 
   return (
