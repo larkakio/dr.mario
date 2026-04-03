@@ -37,3 +37,7 @@ next-env.d.ts
 
 # cursor / debug
 .cursor
+
+# foundry
+contracts/out
+contracts/cache
